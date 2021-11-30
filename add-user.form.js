@@ -113,7 +113,9 @@ class UI {
     let filteredEmployeeArr = [];
     if (this.filterByNameInput.value !== "") {
       filteredEmployeeArr = employeeArr.filter((employee) => {
-        return employee.name === `${event.target.value}`;
+        return employee.name
+          .toLowerCase()
+          .includes(event.target.value.toLowerCase());
       });
     } else {
       filteredEmployeeArr = employeeArr;
