@@ -16,8 +16,16 @@ const resetBtnEL = document.querySelector("#resetFormBtn");
 
 //EVENT LISTENERS
 resetBtnEL.addEventListener("click", (event) => {
-  console.log(event.target.id, "fired");
   //make all input values null or shit
+  employeeNoEL.value = "";
+  firstNameEL.value = "";
+  employeeTitleEL.value = "";
+  employeeRoleEL.value = "";
+  station1EL.value = "";
+  station2EL.value = "";
+  station3EL.value = "";
+  employeeMailEL.value = "";
+  employeePhoneEL.value = "";
 });
 
 //test
