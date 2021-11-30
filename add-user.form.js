@@ -32,6 +32,7 @@ class UI {
   static addRow = document.querySelector("#refreshTableBtn");
   static tbody = document.querySelector("tbody");
   static filterByNameInput = document.querySelector("#filterByNameInput");
+  static allEmployeeRows = document.getElementsByClassName("employeeRow");
   //METHODS
   static resetForm = () => {
     //make all input values null or shit
@@ -46,6 +47,7 @@ class UI {
     this.employeePhoneEL.value = "";
   };
   static resetBtnClick = () => {
+    console.log(this.allEmployeeRows);
     this.resetForm();
   };
   static submitHandler = (event) => {
@@ -122,6 +124,7 @@ class UI {
     }
     filteredEmployeeArr.forEach((employee) => {
       const tr = document.createElement("tr");
+      tr.className = "employeeRow";
       tr.innerHTML = `<th scope="row">${employee.no}</th>
       <td>${employee.name}</td>
       <td>${employee.title}</td>
@@ -130,13 +133,21 @@ class UI {
       <td>${employee.stations[1]}</td>
       <td>${employee.stations[2]}</td>
       <td>${employee.email}</td>
-      <td>${employee.phone}</td>`;
+      <td>${employee.phone}</td>
+      <td>
+      <button type="button" class="btn btn-danger btn-sm px-4">
+        <i class="fas fa-times"></i>
+      </button>
+    </td>`;
       this.tbody.appendChild(tr);
     });
   };
   static refreshTable = (event) => {
     this.filterByNameInput.value = "";
     this.updateTable(event);
+  };
+  static removeTargetRow = (event) => {
+    console.log(event.target.parentNode);
   };
 }
 class LS {
@@ -161,3 +172,6 @@ UI.employeeRoleEL.addEventListener("click", UI.roleHandle);
 UI.employeeAddForm.addEventListener("submit", UI.submitHandler);
 UI.addRow.addEventListener("click", UI.refreshTable);
 UI.filterByNameInput.addEventListener("keyup", UI.updateTable);
+UI.allEmployeeRows.forEach((el) =>
+  el.addEventListener("click", UI.removeTargetRow)
+);
