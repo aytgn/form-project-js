@@ -16,8 +16,9 @@ const bodyEL = document.querySelector("body");
 //->buttons
 const resetBtnEL = document.querySelector("#resetFormBtn");
 const submitBtnEl = document.querySelector("#submitEmployeeForm");
+
 //EVENT HANDLERS
-const resetBtnClick = (event) => {
+const resetForm = () => {
   //make all input values null or shit
   employeeNoEL.value = "";
   firstNameEL.value = "";
@@ -29,25 +30,29 @@ const resetBtnClick = (event) => {
   employeeMailEL.value = "";
   employeePhoneEL.value = "";
 };
+const resetBtnClick = (event) => {
+  resetForm();
+};
 const submitHandler = (event) => {
+  //add validation class *MDB*
   employeeAddForm.classList.add("was-validated");
-  //check employeeRole selected,
+  //check if employee role selected manually
   if (!employeeRoleEL.value) {
     myRoleValidationEL.className = "myRoleInvalid";
     event.preventDefault();
     event.stopPropagation();
   }
-  //check form validity
+  //check form validity *MDB*
   else if (!employeeAddForm.checkValidity()) {
     event.preventDefault();
     event.stopPropagation();
-    console.log("not valid!");
   }
   //if validated,
   else {
     event.preventDefault();
     event.stopPropagation();
-    //create an object with form-control-values
+    //INSTEAD OF SUBMIT, SAVE LOCALLY
+    //1) Create an object with form-control-values
     const employee = {
       no: employeeNoEL.value,
       firstName: firstNameEL.value,
@@ -57,29 +62,23 @@ const submitHandler = (event) => {
       mail: employeeMailEL.value,
       phone: employeePhoneEL.value,
     };
-    //stringify object and save to localStorage
+    // 2) Stringify object and save to local storage
     localStorage.setItem("employeeInfo", JSON.stringify(employee));
-    //then clear values
-    employeeNoEL.value = "";
-    firstNameEL.value = "";
-    employeeTitleEL.value = "";
-    employeeRoleEL.value = "";
-    station1EL.value = "";
-    station2EL.value = "";
-    station3EL.value = "";
-    employeeMailEL.value = "";
-    employeePhoneEL.value = "";
-    // show success Message!
-    //-->create text node in span
+    // 3) Clear input values
+    resetForm();
+    // 4) Show success Message!
+    //-----4.1) Add pre-defined class to myMessage div
     document.querySelector("#myMessage").className =
       "showMessageSuccess text-center";
+    //-----4.2) Add inner text to messageText element
     document.querySelector("#messageText").innerText =
       "Employee Saved Successfully!";
-    //remove validated class
-    employeeAddForm.classList.remove("was-validated");
+    //-----4.3) Hide message with hiding element after 1.5sec
     setTimeout(() => {
       document.querySelector("#myMessage").className = "hideEl";
-    }, 1000);
+    }, 1500);
+    // 5) Remove validation class(bcs we don't want to see any error after success until next submit)
+    employeeAddForm.classList.remove("was-validated");
   }
 };
 const roleHandle = (event) => {
