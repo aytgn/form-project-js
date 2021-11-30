@@ -29,12 +29,20 @@ const resetBtnClick = (event) => {
   employeePhoneEL.value = "";
 };
 const submitHandler = (event) => {
+  const myRoleValidationEL = document.querySelector(".myRoleValid");
+  if (!employeeRoleEL.value) {
+    myRoleValidationEL.className = "myRoleInvalid";
+    event.preventDefault();
+    event.stopPropagation();
+  }
   //check form validity
-    if (!employeeAddForm.checkValidity()) {
+  else if (!employeeAddForm.checkValidity()) {
     event.preventDefault();
     event.stopPropagation();
     console.log("not valid!");
   }
+  //check role manually
+
   employeeAddForm.classList.add("was-validated");
 };
 //EVENT LISTENERS

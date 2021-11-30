@@ -6,3 +6,10 @@
 
 .myStationsRow {
   color: rgba(109, 109, 109, 0.911); }
+
+.myRoleInvalid {
+  display: block;
+  color: red; }
+
+.myRoleValid {
+  display: none; }
