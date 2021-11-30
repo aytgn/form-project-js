@@ -1,4 +1,4 @@
-//SELECT ELEMENTS
+/***************************************SELECT ELEMENTS************************************************/
 //->form
 const employeeAddForm = document.querySelector("#employeeAddForm");
 const employeeNoEL = document.querySelector("#employeeNo");
@@ -17,7 +17,7 @@ const bodyEL = document.querySelector("body");
 const resetBtnEL = document.querySelector("#resetFormBtn");
 const submitBtnEl = document.querySelector("#submitEmployeeForm");
 
-//EVENT HANDLERS
+/***************************************EVENT HANDLERS************************************************/
 const resetForm = () => {
   //make all input values null or shit
   employeeNoEL.value = "";
@@ -81,14 +81,12 @@ const submitHandler = (event) => {
     employeeAddForm.classList.remove("was-validated");
   }
 };
-const roleHandle = (event) => {
+const roleHandle = () => {
+  //whenever roleClicked, hide invalid message for role
   myRoleValidationEL.className = "myRoleValid";
 };
-//EVENT LISTENERS
+
+/***************************************EVENT lISTENERS************************************************/
 resetBtnEL.addEventListener("click", resetBtnClick);
 employeeRoleEL.addEventListener("click", roleHandle);
-//test
-window.onload = () => {
-  //add submit listener to form
-  employeeAddForm.addEventListener("submit", submitHandler);
-};
+employeeAddForm.addEventListener("submit", submitHandler);
