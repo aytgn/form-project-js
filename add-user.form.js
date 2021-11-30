@@ -30,7 +30,7 @@ const resetBtnClick = (event) => {
 };
 const submitHandler = (event) => {
   //check form validity
-  if (!employeeAddForm.checkValidity()) {
+    if (!employeeAddForm.checkValidity()) {
     event.preventDefault();
     event.stopPropagation();
     console.log("not valid!");
