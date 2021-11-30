@@ -1,5 +1,6 @@
 /***************************************CLASSES************************************************/
 class Employee {
+  //employee class to create employee instance
   constructor(no, name, title, role, sections, mail, phone) {
     this.no = no;
     this.name = name;
@@ -26,6 +27,8 @@ class UI {
   static bodyEL = document.querySelector("body");
   static resetBtnEL = document.querySelector("#resetFormBtn");
   static submitBtnEl = document.querySelector("#submitEmployeeForm");
+  static showMessage = document.querySelector("#myMessage");
+  static showMessageText = document.querySelector("#messageText");
   //METHODS
   static resetForm = () => {
     //make all input values null or shit
@@ -58,10 +61,10 @@ class UI {
     }
     //if validated,
     else {
+      //INSTEAD OF SUBMIT, SAVE LOCALLY
       event.preventDefault();
       event.stopPropagation();
-      //INSTEAD OF SUBMIT, SAVE LOCALLY
-      // 1) Create an object with form-control-values
+      // 1) Create an employee instance with form values
       const employee = new Employee(
         UI.employeeNoEL.value,
         UI.firstNameEL.value,
@@ -75,21 +78,12 @@ class UI {
       const employeeArrUI = LS.get("employeeArr");
       // 3) Push employee to employeeArr
       employeeArrUI.push(employee);
-      // 4) Stringify array and save to local storage
+      // 4) save updated employeeArr at local storage
       LS.set("employeeArr", employeeArrUI);
       // 5) Clear input values
       this.resetForm();
       // 6) Show success Message!
-      //-----4.1) Add pre-defined class to myMessage div
-      document.querySelector("#myMessage").className =
-        "showMessageSuccess text-center";
-      //-----4.2) Add inner text to messageText element
-      document.querySelector("#messageText").innerText =
-        "Employee Saved Successfully!";
-      //-----4.3) Hide message with hiding element after 1.5sec
-      setTimeout(() => {
-        document.querySelector("#myMessage").className = "hideEl";
-      }, 1500);
+      this.showSuccessMessage();
       // 7) Remove validation class(bcs we don't want to see any error after success until next submit)
       employeeAddForm.classList.remove("was-validated");
     }
@@ -97,6 +91,16 @@ class UI {
   static roleHandle = () => {
     //whenever roleClicked, hide invalid message for role
     this.myRoleValidationEL.className = "myRoleValid";
+  };
+  static showSuccessMessage = () => {
+    //-----4.1) Add pre-defined class to myMessage div
+    this.showMessage.className = "showMessageSuccess text-center";
+    //-----4.2) Add inner text to messageText element
+    this.showMessageText.innerText = "Employee Saved Successfully!";
+    //-----4.3) Hide message with hiding element after 1.5sec
+    setTimeout(() => {
+      document.querySelector("#myMessage").className = "hideEl";
+    }, 1500);
   };
 }
 class LS {
