@@ -29,8 +29,9 @@ class UI {
   static submitBtnEl = document.querySelector("#submitEmployeeForm");
   static showMessage = document.querySelector("#myMessage");
   static showMessageText = document.querySelector("#messageText");
-  static addRow = document.querySelector("#addRow");
+  static addRow = document.querySelector("#refreshTableBtn");
   static tbody = document.querySelector("tbody");
+  static filterByNameInput = document.querySelector("#filterByNameInput");
   //METHODS
   static resetForm = () => {
     //make all input values null or shit
@@ -104,9 +105,20 @@ class UI {
       document.querySelector("#myMessage").className = "hideEl";
     }, 1500);
   };
-  static addEmployee = () => {
+  static updateTable = (event) => {
+    //first clear table
+    this.tbody.innerHTML = "";
     const employeeArr = LS.get("employeeArr");
-    employeeArr.forEach((employee) => {
+    //filter employees
+    let filteredEmployeeArr = [];
+    if (this.filterByNameInput.value !== "") {
+      filteredEmployeeArr = employeeArr.filter((employee) => {
+        return employee.name === `${event.target.value}`;
+      });
+    } else {
+      filteredEmployeeArr = employeeArr;
+    }
+    filteredEmployeeArr.forEach((employee) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `<th scope="row">${employee.no}</th>
       <td>${employee.name}</td>
@@ -119,6 +131,10 @@ class UI {
       <td>${employee.phone}</td>`;
       this.tbody.appendChild(tr);
     });
+  };
+  static refreshTable = (event) => {
+    this.filterByNameInput.value = "";
+    this.updateTable(event);
   };
 }
 class LS {
@@ -141,4 +157,5 @@ class LS {
 UI.resetBtnEL.addEventListener("click", UI.resetBtnClick);
 UI.employeeRoleEL.addEventListener("click", UI.roleHandle);
 UI.employeeAddForm.addEventListener("submit", UI.submitHandler);
-UI.addRow.addEventListener("click", UI.addEmployee);
+UI.addRow.addEventListener("click", UI.refreshTable);
+UI.filterByNameInput.addEventListener("keyup", UI.updateTable);
