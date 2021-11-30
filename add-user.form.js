@@ -1,13 +1,13 @@
 /***************************************CLASSES************************************************/
 class Employee {
   //employee class to create employee instance
-  constructor(no, name, title, role, sections, mail, phone) {
+  constructor(no, name, title, role, sections, email, phone) {
     this.no = no;
     this.name = name;
     this.title = title;
     this.role = role;
     this.stations = sections;
-    this.mail = mail;
+    this.email = email;
     this.phone = phone;
   }
 }
@@ -29,6 +29,8 @@ class UI {
   static submitBtnEl = document.querySelector("#submitEmployeeForm");
   static showMessage = document.querySelector("#myMessage");
   static showMessageText = document.querySelector("#messageText");
+  static addRow = document.querySelector("#addRow");
+  static tbody = document.querySelector("tbody");
   //METHODS
   static resetForm = () => {
     //make all input values null or shit
@@ -102,6 +104,22 @@ class UI {
       document.querySelector("#myMessage").className = "hideEl";
     }, 1500);
   };
+  static addEmployee = () => {
+    const employeeArr = LS.get("employeeArr");
+    employeeArr.forEach((employee) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<th scope="row">${employee.no}</th>
+      <td>${employee.name}</td>
+      <td>${employee.title}</td>
+      <td>${employee.role}</td>
+      <td>${employee.stations[0]}</td>
+      <td>${employee.stations[1]}</td>
+      <td>${employee.stations[2]}</td>
+      <td>${employee.email}</td>
+      <td>${employee.phone}</td>`;
+      this.tbody.appendChild(tr);
+    });
+  };
 }
 class LS {
   static get = (key) => {
@@ -123,3 +141,4 @@ class LS {
 UI.resetBtnEL.addEventListener("click", UI.resetBtnClick);
 UI.employeeRoleEL.addEventListener("click", UI.roleHandle);
 UI.employeeAddForm.addEventListener("submit", UI.submitHandler);
+UI.addRow.addEventListener("click", UI.addEmployee);
