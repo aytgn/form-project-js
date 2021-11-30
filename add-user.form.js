@@ -16,6 +16,7 @@ const bodyEL = document.querySelector("body");
 //->buttons
 const resetBtnEL = document.querySelector("#resetFormBtn");
 const submitBtnEl = document.querySelector("#submitEmployeeForm");
+/***************************************CLASSES************************************************/
 
 /***************************************EVENT HANDLERS************************************************/
 const resetForm = () => {
