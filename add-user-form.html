@@ -24,6 +24,9 @@
   </head>
   <body>
     <div class="myOutterContainer container">
+      <div class="" id="myMessage">
+        <span id="messageText"></span>
+      </div>
       <form id="employeeAddForm" novalidate>
         <div class="row mb-4 mt-4">
           <div class="col">
@@ -42,7 +45,7 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="firstName" class="form-control" />
+              <input type="text" id="firstName" class="form-control" required />
               <label for="firstName" class="form-label">First Name</label>
               <div class="invalid-feedback">Required</div>
             </div>
@@ -51,7 +54,12 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="employeeTitle" class="form-control" />
+              <input
+                type="text"
+                id="employeeTitle"
+                class="form-control"
+                required
+              />
               <label for="employeeTitle" class="form-label">Title</label>
               <div class="invalid-feedback">Required</div>
             </div>
@@ -75,7 +83,7 @@
               <option value="4">Role4</option>
             </select>
           </div>
-          <div class="myRoleValid">Required</div>
+          <div class="myRoleValid" id="myRoleValidation">Required</div>
         </div>
         <div class="row mb-4 myStationsRow">
           <div class="col-md-1 pr-1">Stations:</div>
