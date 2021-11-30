@@ -52,7 +52,7 @@ const submitHandler = (event) => {
     event.preventDefault();
     event.stopPropagation();
     //INSTEAD OF SUBMIT, SAVE LOCALLY
-    //1) Create an object with form-control-values
+    // 1) Create an object with form-control-values
     const employee = {
       no: employeeNoEL.value,
       firstName: firstNameEL.value,
@@ -62,11 +62,19 @@ const submitHandler = (event) => {
       mail: employeeMailEL.value,
       phone: employeePhoneEL.value,
     };
-    // 2) Stringify object and save to local storage
-    localStorage.setItem("employeeInfo", JSON.stringify(employee));
-    // 3) Clear input values
+    // 2) Get local employeeArr
+    let employeeArrLS = localStorage.getItem("employeeArr");
+    //---->2.1)If no employeeArr, make it an empty array
+    if (!employeeArrLS) employeeArrLS = "[]";
+    //---->2.2)Convert to JSON
+    const employeeArrUI = JSON.parse(employeeArrLS);
+    // 3) Push employee to employeeArr
+    employeeArrUI.push(employee);
+    // 4) Stringify array and save to local storage
+    localStorage.setItem("employeeArr", JSON.stringify(employeeArrUI));
+    // 5) Clear input values
     resetForm();
-    // 4) Show success Message!
+    // 6) Show success Message!
     //-----4.1) Add pre-defined class to myMessage div
     document.querySelector("#myMessage").className =
       "showMessageSuccess text-center";
@@ -77,7 +85,7 @@ const submitHandler = (event) => {
     setTimeout(() => {
       document.querySelector("#myMessage").className = "hideEl";
     }, 1500);
-    // 5) Remove validation class(bcs we don't want to see any error after success until next submit)
+    // 7) Remove validation class(bcs we don't want to see any error after success until next submit)
     employeeAddForm.classList.remove("was-validated");
   }
 };
