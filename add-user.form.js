@@ -88,7 +88,7 @@ class UI {
       // 5) Clear input values
       this.resetForm();
       // 6) Show success Message!
-      this.showSuccessMessage();
+      this.showSuccessMessage("new employee created!");
       // 7) Remove validation class(bcs we don't want to see any error after success until next submit)
       employeeAddForm.classList.remove("was-validated");
     }
@@ -97,11 +97,11 @@ class UI {
     //whenever roleClicked, hide invalid message for role
     this.myRoleValidationEL.className = "myRoleValid";
   };
-  static showSuccessMessage = () => {
+  static showSuccessMessage = (messageText) => {
     //-----4.1) Add pre-defined class to myMessage div
     this.showMessage.className = "showMessageSuccess text-center";
     //-----4.2) Add inner text to messageText element
-    this.showMessageText.innerText = "Employee Saved Successfully!";
+    this.showMessageText.innerText = messageText;
     //-----4.3) Hide message with hiding element after 1.5sec
     setTimeout(() => {
       document.querySelector("#myMessage").className = "hideEl";
@@ -139,6 +139,8 @@ class UI {
         <i class="fas fa-times"></i>
       </button>
     </td>`;
+      //add eventListener immediately!
+      tr.addEventListener("click", this.removeTargetRow);
       this.tbody.appendChild(tr);
     });
   };
@@ -147,7 +149,35 @@ class UI {
     this.updateTable(event);
   };
   static removeTargetRow = (event) => {
-    console.log(event.target.parentNode);
+    //fire only if clicked to remove button
+    if (event.target.tagName === "BUTTON") {
+      console.log("fired!");
+      //get confirmation result
+      const confirmationResult = confirm("Remove employee?");
+      //if confirmationResult is true,
+      if (confirmationResult) {
+        //Remove selected user from local storage
+        //--->1)Get local storage array
+        const employeeArr = LS.get("employeeArr");
+        console.log(employeeArr);
+        //--->2)Get selected employee No
+        const employeeNoUI =
+          event.target.parentNode.parentNode.firstChild.innerHTML;
+        console.log(employeeNoUI);
+        //--->3)get index of matched employee
+        let employeeToRemove = employeeArr.findIndex((employee) => {
+          return employee.no === employeeNoUI;
+        });
+        //--->4)remove matched employee from arr
+        employeeArr.splice(employeeToRemove, 1);
+        //override new array to local storage
+        LS.set("employeeArr", employeeArr);
+        //show success message
+        this.showSuccessMessage("employee removed successfully1");
+        //Update Table
+        this.refreshTable();
+      }
+    }
   };
 }
 class LS {
@@ -172,6 +202,3 @@ UI.employeeRoleEL.addEventListener("click", UI.roleHandle);
 UI.employeeAddForm.addEventListener("submit", UI.submitHandler);
 UI.addRow.addEventListener("click", UI.refreshTable);
 UI.filterByNameInput.addEventListener("keyup", UI.updateTable);
-UI.allEmployeeRows.forEach((el) =>
-  el.addEventListener("click", UI.removeTargetRow)
-);
