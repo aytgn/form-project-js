@@ -1,3 +1,4 @@
+//Imports
 import Employee from "./employee";
 import LS from "./local-storage";
 import {
@@ -18,11 +19,10 @@ import {
   filterByNameInput,
   allEmployeeRows,
 } from "./user-interface-elements";
-
+//instances
 const ls = new LS();
 
 export default class UI {
-  //VARIABLES
   //METHODS
   resetForm = () => {
     //make all input values null or shit

@@ -1,7 +1,8 @@
 //IMPORTS
 import "./style.css";
 //User Interface Class
-import UI from "./user-interface";
+//Imports
+import UI from "./user-interface-methods";
 import {
   employeeAddForm,
   employeeRoleEL,
@@ -9,8 +10,9 @@ import {
   addRow,
   filterByNameInput,
 } from "./user-interface-elements";
-/***************************************EVENT lISTENERS************************************************/
+//instances
 const ui = new UI();
+//Event Listeners
 resetBtnEL.addEventListener("click", ui.resetBtnClick);
 employeeRoleEL.addEventListener("click", ui.roleHandle);
 employeeAddForm.addEventListener("submit", ui.submitHandler);
