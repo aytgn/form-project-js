@@ -100,7 +100,7 @@ export default class UI {
     //first clear table
     tbody.innerHTML = "";
     //get filtered employees
-    filteredEmployeeArr = this.filteredArray();
+    const filteredEmployeeArr = this.filteredArray();
     //print them each to table
     filteredEmployeeArr.forEach((employee) => {
       const tr = document.createElement("tr");
@@ -127,10 +127,25 @@ export default class UI {
   filteredArray = (key, value) => {
     //bring copy of employee arr
     const employeeArrCopy = empArrCopy.get();
-    console.log("empArrCopy: ", empArrCopy);
+    console.log("empArrCopy: ", employeeArrCopy);
     //filter that shit
     const filteredArr = employeeArrCopy.filter((employee) => {
-      return employee.no == "01";
+      switch (key) {
+        case "no":
+          return employee.no == value;
+        case "name":
+          return employee.name == value;
+        case "title":
+          return employee.title == value;
+        case "role":
+          return employee.role == value;
+        case "email":
+          return employee.email == value;
+        case "phone":
+          return employee.phone == value;
+        default:
+          return [];
+      }
     });
     console.log("filteredArr: ", filteredArr);
     //now, set filtered array as empArrCopy
