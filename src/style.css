@@ -1,18 +1,23 @@
 #employeeRole {
-  width: 100%; }
+  width: 100%;
+}
 
 .mySelect {
-  color: rgba(109, 109, 109, 0.911); }
+  color: rgba(109, 109, 109, 0.911);
+}
 
 .myStationsRow {
-  color: rgba(109, 109, 109, 0.911); }
+  color: rgba(109, 109, 109, 0.911);
+}
 
 .myRoleInvalid {
   display: block;
-  color: red; }
+  color: red;
+}
 
 .myRoleValid {
-  display: none; }
+  display: none;
+}
 
 .showMessageSuccess {
   margin-top: 1em;
@@ -21,11 +26,15 @@
   border-color: green;
   color: green;
   border-width: 2px;
-  border-style: solid; }
+  border-style: solid;
+}
 
 .hideEl {
-  display: none; }
+  display: none;
+}
 
 .myIcon {
   text-align: center;
-  color: red; }
+  color: red;
+}
+

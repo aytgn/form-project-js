@@ -184,30 +184,85 @@
     <br />
     <!--------------------------------------TABLE------------------------------------------------------->
     <div class="myOutterContainer container">
-      <div class="row">
-        <div class="col">
-          <div class="form-outline">
-            <input type="text" id="filterByNameInput" class="form-control" />
-            <label class="form-label" for="form12">Filter By Name</label>
-          </div>
-        </div>
-      </div>
       <br />
       <div class="row">
         <div class="col">
           <table class="table table-striped">
             <thead>
               <tr>
-                <th scope="col">NO</th>
-                <th scope="col">NAME</th>
-                <th scope="col">TITLE</th>
-                <th scope="col">ROLE</th>
-                <th scope="col">ST1</th>
-                <th scope="col">ST2</th>
-                <th scope="col">ST3</th>
-                <th scope="col">EMAIL</th>
-                <th scope="col">PHONE</th>
-                <th scope="col">REMOVE?</th>
+                <th scope="col">
+                  <div class="form-outline mx-n3">
+                    <input type="number" id="filterByNO" class="form-control" />
+                    <label class="form-label" for="filterByNO">NO:</label>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div class="form-outline mx-n3">
+                    <input type="text" id="filterByName" class="form-control" />
+                    <label class="form-label" for="filterByName">NAME:</label>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div class="form-outline mx-n3">
+                    <input
+                      type="text"
+                      id="filterByTitle"
+                      class="form-control"
+                    />
+                    <label class="form-label" for="filterByTitle">TITLE:</label>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div class="form-outline mx-n3">
+                    <input type="text" id="filterByRole" class="form-control" />
+                    <label class="form-label" for="filterByRole">ROLE:</label>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div class="form-outline mx-n3">
+                    <input type="text" id="filterBySt1" class="form-control" />
+                    <label class="form-label" for="filterBySt1">ST1:</label>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div class="form-outline mx-n3">
+                    <input type="text" id="filterBySt2" class="form-control" />
+                    <label class="form-label" for="filterBySt2">ST2:</label>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div class="form-outline mx-n3">
+                    <input type="text" id="filterBySt3" class="form-control" />
+                    <label class="form-label" for="filterBySt3">ST3:</label>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div class="form-outline mx-n3">
+                    <input
+                      type="text"
+                      id="filterByEmail"
+                      class="form-control"
+                    />
+                    <label class="form-label" for="filterByEmail">EMAIL:</label>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div class="form-outline mx-n3">
+                    <input
+                      type="text"
+                      id="filterByPhone"
+                      class="form-control"
+                    />
+                    <label class="form-label" for="filterByPhone">PHONE:</label>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div class="form-outline mx-n3">
+                    <button class="btn btn-secondary" id="resetFiltersBtn">
+                      RESET
+                    </button>
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -223,7 +278,6 @@
         </div>
       </div>
       <br />
-
       <br />
     </div>
 

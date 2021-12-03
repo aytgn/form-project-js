@@ -16,8 +16,6 @@ import {
   showMessage,
   showMessageText,
   tbody,
-  filterByNameInput,
-  allEmployeeRows,
 } from "./user-interface-elements";
 //instances
 const ls = new LS();
@@ -37,7 +35,6 @@ export default class UI {
     employeePhoneEL.value = "";
   };
   resetBtnClick = () => {
-    console.log(allEmployeeRows);
     this.resetForm();
   };
   submitHandler = (event) => {
@@ -103,15 +100,7 @@ export default class UI {
     const employeeArr = ls.get("employeeArr");
     //filter employees
     let filteredEmployeeArr = [];
-    if (filterByNameInput.value !== "") {
-      filteredEmployeeArr = employeeArr.filter((employee) => {
-        return employee.name
-          .toLowerCase()
-          .includes(event.target.value.toLowerCase());
-      });
-    } else {
-      filteredEmployeeArr = employeeArr;
-    }
+    filteredEmployeeArr = employeeArr;
     filteredEmployeeArr.forEach((employee) => {
       const tr = document.createElement("tr");
       tr.className = "employeeRow";
@@ -136,7 +125,6 @@ export default class UI {
   };
   refreshTable = (event) => {
     //clear input field
-    filterByNameInput.value = "";
     //updateTable
     this.updateTable(event);
   };
