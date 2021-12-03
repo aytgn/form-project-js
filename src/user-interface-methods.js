@@ -1,6 +1,7 @@
 //Imports
 import Employee from "./employee";
 import LS from "./local-storage";
+import EmployeeArrCopy from "./employeeArr-copy";
 import {
   employeeAddForm,
   employeeNoEL,
@@ -17,9 +18,10 @@ import {
   showMessageText,
   tbody,
 } from "./user-interface-elements";
-//instances
+//Instances
 const ls = new LS();
-
+const empArrCopy = new EmployeeArrCopy();
+//CLASS
 export default class UI {
   //METHODS
   resetForm = () => {
@@ -97,10 +99,9 @@ export default class UI {
   updateTable = (event) => {
     //first clear table
     tbody.innerHTML = "";
-    const employeeArr = ls.get("employeeArr");
-    //filter employees
-    let filteredEmployeeArr = [];
-    filteredEmployeeArr = employeeArr;
+    //get filtered employees
+    filteredEmployeeArr = this.filteredArray();
+    //print them each to table
     filteredEmployeeArr.forEach((employee) => {
       const tr = document.createElement("tr");
       tr.className = "employeeRow";
@@ -122,6 +123,21 @@ export default class UI {
       tr.addEventListener("click", this.removeTargetRow);
       tbody.appendChild(tr);
     });
+  };
+  filteredArray = (key, value) => {
+    //bring copy of employee arr
+    const employeeArrCopy = empArrCopy.get();
+    console.log("empArrCopy: ", empArrCopy);
+    //filter that shit
+    const filteredArr = employeeArrCopy.filter((employee) => {
+      return employee.no == "01";
+    });
+    console.log("filteredArr: ", filteredArr);
+    //now, set filtered array as empArrCopy
+    empArrCopy.set(filteredArr);
+    //after updating employeeArrCopy, return that shit
+    console.log("updated empArrCopy: ", empArrCopy.get());
+    return empArrCopy.get();
   };
   refreshTable = (event) => {
     //clear input field
