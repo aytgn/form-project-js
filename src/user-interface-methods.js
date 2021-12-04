@@ -16,6 +16,8 @@ import {
   showMessage,
   showMessageText,
   tbody,
+  noFilterEL,
+  nameFilterEL,
 } from "./user-interface-elements";
 //Instances
 const ls = new LS();
@@ -125,18 +127,25 @@ export default class UI {
       });
     }
   };
-  filteredArray = (key) => {
+  filteredArray = () => {
     //bring employee arr
-    const employeeArr = ls.get("employeeArr");
-    let filteredNoArr;
-    //filter that shit
-    switch (key) {
-      case "no":
-        filteredNoArr = employeeArr.filter((employee) => {
-          return employee.no == event.target.value;
+    this.filteredEmployee = ls.get("employeeArr");
+    //run all filters!!
+    if (noFilterEL.value !== "") {
+      console.log("noFilterEl value: ", noFilterEL.value);
+      this.filteredEmployee = this.filteredEmployee.filter((employee) => {
+        console.log("calisti");
+        return employee.no == noFilterEL.value;
+      });
+      if (nameFilterEL.value !== "") {
+        this.filteredEmployee = this.filteredEmployee.filter((employee) => {
+          console.log("calisti");
+          return employee.name == nameFilterEL.value;
         });
-        this.filteredEmployee = filteredNoArr;
-        break;
+      }
+    }
+    if (noFilterEL.value == "" && nameFilterEL.value == "") {
+      this.filteredEmployee = [];
     }
   };
   refreshTable = (event) => {
