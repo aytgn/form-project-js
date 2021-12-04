@@ -8,7 +8,6 @@ import {
   employeeRoleEL,
   resetBtnEL,
   addRow,
-  resetFiltersBtn,
   noFilterEL,
 } from "./user-interface-elements";
 //instances
@@ -18,4 +17,5 @@ resetBtnEL.addEventListener("click", ui.resetBtnClick);
 employeeRoleEL.addEventListener("click", ui.roleHandle);
 employeeAddForm.addEventListener("submit", ui.submitHandler);
 addRow.addEventListener("click", ui.refreshTable);
-noFilterEL.addEventListener("keyup", ui.filteredArray.bind("no", "01"));
+noFilterEL.addEventListener("keyup", ui.filteredArray.bind(event, "no"));
+noFilterEL.addEventListener("keyup", ui.updateTable);

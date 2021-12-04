@@ -1,7 +1,6 @@
 //Imports
 import Employee from "./employee";
 import LS from "./local-storage";
-import EmployeeArrCopy from "./employeeArr-copy";
 import {
   employeeAddForm,
   employeeNoEL,
@@ -20,7 +19,6 @@ import {
 } from "./user-interface-elements";
 //Instances
 const ls = new LS();
-const empArrCopy = new EmployeeArrCopy();
 //CLASS
 export default class UI {
   //METHODS
@@ -100,12 +98,14 @@ export default class UI {
     //first clear table
     tbody.innerHTML = "";
     //get filtered employees
-    const filteredEmployeeArr = this.filteredArray();
+    const filteredEmployeeArr = this.filteredEmployee;
+    console.log("filteredEmployeeArr: ", filteredEmployeeArr);
     //print them each to table
-    filteredEmployeeArr.forEach((employee) => {
-      const tr = document.createElement("tr");
-      tr.className = "employeeRow";
-      tr.innerHTML = `<th scope="row">${employee.no}</th>
+    if (filteredEmployeeArr) {
+      filteredEmployeeArr.forEach((employee) => {
+        const tr = document.createElement("tr");
+        tr.className = "employeeRow";
+        tr.innerHTML = `<th scope="row">${employee.no}</th>
         <td>${employee.name}</td>
         <td>${employee.title}</td>
         <td>${employee.role}</td>
@@ -119,40 +119,25 @@ export default class UI {
           <i class="fas fa-times"></i>
         </button>
       </td>`;
-      //add eventListener immediately!
-      tr.addEventListener("click", this.removeTargetRow);
-      tbody.appendChild(tr);
-    });
+        //add eventListener immediately!
+        tr.addEventListener("click", this.removeTargetRow);
+        tbody.appendChild(tr);
+      });
+    }
   };
-  filteredArray = (key, value) => {
-    //bring copy of employee arr
-    const employeeArrCopy = empArrCopy.get();
-    console.log("empArrCopy: ", employeeArrCopy);
+  filteredArray = (key) => {
+    //bring employee arr
+    const employeeArr = ls.get("employeeArr");
+    let filteredNoArr;
     //filter that shit
-    const filteredArr = employeeArrCopy.filter((employee) => {
-      switch (key) {
-        case "no":
-          return employee.no == value;
-        case "name":
-          return employee.name == value;
-        case "title":
-          return employee.title == value;
-        case "role":
-          return employee.role == value;
-        case "email":
-          return employee.email == value;
-        case "phone":
-          return employee.phone == value;
-        default:
-          return [];
-      }
-    });
-    console.log("filteredArr: ", filteredArr);
-    //now, set filtered array as empArrCopy
-    empArrCopy.set(filteredArr);
-    //after updating employeeArrCopy, return that shit
-    console.log("updated empArrCopy: ", empArrCopy.get());
-    return empArrCopy.get();
+    switch (key) {
+      case "no":
+        filteredNoArr = employeeArr.filter((employee) => {
+          return employee.no == event.target.value;
+        });
+        this.filteredEmployee = filteredNoArr;
+        break;
+    }
   };
   refreshTable = (event) => {
     //clear input field
