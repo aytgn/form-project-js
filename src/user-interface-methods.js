@@ -37,8 +37,16 @@ export default class UI {
     employeeMailEL.value = "";
     employeePhoneEL.value = "";
   };
+  resetFilters = () => {
+    noFilterEL.value = "";
+    nameFilterEL.value = "";
+    titleFilterEL.value = "";
+  };
   resetBtnClick = () => {
     this.resetForm();
+  };
+  resetFiltersClick = () => {
+    this.resetFilters();
   };
   submitHandler = (event) => {
     //add validation class *MDB*
@@ -100,9 +108,12 @@ export default class UI {
   updateTable = (event) => {
     //first clear table
     tbody.innerHTML = "";
+    //if showAll clicked!
+    if (event.target.tagName == "BUTTON") {
+      this.filteredEmployeeArr = ls.get("employeeArr");
+    }
     //get filtered employees
     const filteredEmployeeArr = this.filteredEmployeeArr;
-    console.log("filteredEmployeeArr: ", filteredEmployeeArr);
     //print them each to table
     if (filteredEmployeeArr) {
       filteredEmployeeArr.forEach((employee) => {
@@ -150,7 +161,7 @@ export default class UI {
     }
     //title filter
     if (titleFilterEL.value !== "") {
-      console.log("fired!")
+      console.log("fired!");
       this.filteredEmployeeArr = this.filteredEmployeeArr.filter((employee) => {
         return employee.title
           .toLowerCase()

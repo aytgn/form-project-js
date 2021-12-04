@@ -14,10 +14,13 @@ export const resetBtnEL = document.querySelector("#resetFormBtn");
 export const submitBtnEl = document.querySelector("#submitEmployeeForm");
 export const showMessage = document.querySelector("#myMessage");
 export const showMessageText = document.querySelector("#messageText");
-export const addRow = document.querySelector("#refreshTableBtn");
 export const tbody = document.querySelector("tbody");
 export const filterByNameInput = document.querySelector("#filterByNameInput");
 export const allEmployeeRows = document.getElementsByClassName("employeeRow");
+export const showAllEmployeesBtn = document.getElementById(
+  "showAllEmployeesBtn"
+);
+//filters
 export const noFilterEL = document.getElementById("filterByNO");
 export const nameFilterEL = document.getElementById("filterByName");
 export const titleFilterEL = document.getElementById("filterByTitle");

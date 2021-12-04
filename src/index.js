@@ -7,10 +7,11 @@ import {
   employeeAddForm,
   employeeRoleEL,
   resetBtnEL,
-  addRow,
   nameFilterEL,
   noFilterEL,
   titleFilterEL,
+  resetFiltersBtn,
+  showAllEmployeesBtn,
 } from "./user-interface-elements";
 //instances
 const ui = new UI();
@@ -18,7 +19,8 @@ const ui = new UI();
 resetBtnEL.addEventListener("click", ui.resetBtnClick);
 employeeRoleEL.addEventListener("click", ui.roleHandle);
 employeeAddForm.addEventListener("submit", ui.submitHandler);
-addRow.addEventListener("click", ui.refreshTable);
+showAllEmployeesBtn.addEventListener("click", ui.updateTable);
+resetFiltersBtn.addEventListener("click", ui.resetFiltersClick);
 
 noFilterEL.addEventListener("keyup", ui.filteredArray);
 noFilterEL.addEventListener("keyup", ui.updateTable);
