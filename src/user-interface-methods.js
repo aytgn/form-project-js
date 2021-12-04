@@ -161,7 +161,6 @@ export default class UI {
     }
     //title filter
     if (titleFilterEL.value !== "") {
-      console.log("fired!");
       this.filteredEmployeeArr = this.filteredEmployeeArr.filter((employee) => {
         return employee.title
           .toLowerCase()

@@ -21,7 +21,7 @@ employeeRoleEL.addEventListener("click", ui.roleHandle);
 employeeAddForm.addEventListener("submit", ui.submitHandler);
 showAllEmployeesBtn.addEventListener("click", ui.updateTable);
 resetFiltersBtn.addEventListener("click", ui.resetFiltersClick);
-
+//--->filters
 noFilterEL.addEventListener("keyup", ui.filteredArray);
 noFilterEL.addEventListener("keyup", ui.updateTable);
 nameFilterEL.addEventListener("keyup", ui.filteredArray);
