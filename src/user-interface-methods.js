@@ -18,6 +18,7 @@ import {
   tbody,
   noFilterEL,
   nameFilterEL,
+  titleFilterEL,
 } from "./user-interface-elements";
 //Instances
 const ls = new LS();
@@ -100,7 +101,7 @@ export default class UI {
     //first clear table
     tbody.innerHTML = "";
     //get filtered employees
-    const filteredEmployeeArr = this.filteredEmployee;
+    const filteredEmployeeArr = this.filteredEmployeeArr;
     console.log("filteredEmployeeArr: ", filteredEmployeeArr);
     //print them each to table
     if (filteredEmployeeArr) {
@@ -129,23 +130,39 @@ export default class UI {
   };
   filteredArray = () => {
     //bring employee arr
-    this.filteredEmployee = ls.get("employeeArr");
+    this.filteredEmployeeArr = ls.get("employeeArr");
     //run all filters!!
+    //no. filter
     if (noFilterEL.value !== "") {
-      console.log("noFilterEl value: ", noFilterEL.value);
-      this.filteredEmployee = this.filteredEmployee.filter((employee) => {
-        console.log("calisti");
-        return employee.no == noFilterEL.value;
+      this.filteredEmployeeArr = this.filteredEmployeeArr.filter((employee) => {
+        return employee.no
+          .toLowerCase()
+          .includes(noFilterEL.value.toLowerCase());
       });
-      if (nameFilterEL.value !== "") {
-        this.filteredEmployee = this.filteredEmployee.filter((employee) => {
-          console.log("calisti");
-          return employee.name == nameFilterEL.value;
-        });
-      }
     }
-    if (noFilterEL.value == "" && nameFilterEL.value == "") {
-      this.filteredEmployee = [];
+    //name filter
+    if (nameFilterEL.value !== "") {
+      this.filteredEmployeeArr = this.filteredEmployeeArr.filter((employee) => {
+        return employee.name
+          .toLowerCase()
+          .includes(nameFilterEL.value.toLowerCase());
+      });
+    }
+    //title filter
+    if (titleFilterEL.value !== "") {
+      console.log("fired!")
+      this.filteredEmployeeArr = this.filteredEmployeeArr.filter((employee) => {
+        return employee.title
+          .toLowerCase()
+          .includes(titleFilterEL.value.toLowerCase());
+      });
+    }
+    if (
+      noFilterEL.value === "" &&
+      nameFilterEL.value === "" &&
+      titleFilterEL.value === ""
+    ) {
+      this.filteredEmployeeArr = [];
     }
   };
   refreshTable = (event) => {

@@ -10,6 +10,7 @@ import {
   addRow,
   nameFilterEL,
   noFilterEL,
+  titleFilterEL,
 } from "./user-interface-elements";
 //instances
 const ui = new UI();
@@ -23,3 +24,5 @@ noFilterEL.addEventListener("keyup", ui.filteredArray);
 noFilterEL.addEventListener("keyup", ui.updateTable);
 nameFilterEL.addEventListener("keyup", ui.filteredArray);
 nameFilterEL.addEventListener("keyup", ui.updateTable);
+titleFilterEL.addEventListener("keyup", ui.filteredArray);
+titleFilterEL.addEventListener("keyup", ui.updateTable);
